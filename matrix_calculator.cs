@@ -42,7 +42,22 @@ class SquareMatrix
     }
   }
 
-  // Метод для сложения матриц
+  //Метод для нахождения суммы элементов матрицы
+  public int SumMatrixElements(SquareMatrix matrix)
+  {
+    int size = matrix.size;
+    int resultSum = 0;
+    for (int rowIndex = 0; rowIndex < size; ++rowIndex)
+    {
+      for (int columnIndex = 0; columnIndex < size; ++columnIndex)
+      {
+        resultSum += matrix.digits[rowIndex, columnIndex];
+      }
+    }
+    return resultSum;
+  }
+
+  // Перегрузка оператора +
   public static SquareMatrix operator +(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
   {
     int size = firstMatrix.size;
@@ -57,7 +72,7 @@ class SquareMatrix
     return result;
   }
 
-  // Метод для умножения матриц
+  // Перегрузка оператора *
   public static SquareMatrix operator *(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
   {
     int size = firstMatrix.size;
@@ -76,6 +91,53 @@ class SquareMatrix
       }
     }
     return result;
+  }
+  
+  // Перегрузка оператора >
+  public static bool operator >(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    return firstMatrix.SumMatrixElements(firstMatrix) > secondMatrix.SumMatrixElements(secondMatrix);
+  }
+
+  // Перегрузка оператора <
+  public static bool operator <(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    return firstMatrix.SumMatrixElements(firstMatrix) < secondMatrix.SumMatrixElements(secondMatrix);
+  }
+
+  // Перегрузка оператора >=
+  public static bool operator >=(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    return firstMatrix.SumMatrixElements(firstMatrix) >= secondMatrix.SumMatrixElements(secondMatrix);
+  }
+
+  // Перегрузка оператора <=
+  public static bool operator <=(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    return firstMatrix.SumMatrixElements(firstMatrix) <= secondMatrix.SumMatrixElements(secondMatrix);
+  }
+
+  // Перегрузка оператора ==
+  public static bool operator ==(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    int size = firstMatrix.size;
+    for (int rowIndex = 0; rowIndex < size; ++rowIndex)
+    {
+      for (int columnIndex = 0; columnIndex < size; ++columnIndex)
+      {
+        if (firstMatrix.digits[rowIndex, columnIndex] != secondMatrix.digits[rowIndex, columnIndex])
+        {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  // Перегрузка оператора !=
+  public static bool operator !=(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    return !(firstMatrix == secondMatrix);
   }
 }
 
@@ -120,13 +182,13 @@ internal class Program
           "\n7) Операция ==" +
           "\n8) Операция !=" +
           "\n9) true / false" +
-          "\n10) The determinant of the matrix" +
+          "\n10) Найти детерминанты матриц" +
           "\n0) Выйти");
       Write("Выберите действие: ");
       int сhoice = Convert.ToInt32(ReadLine());
       if (сhoice == 0) break;
       WriteLine();
-      
+
       // Выбор действия с матрицами
       switch (сhoice)
       {
@@ -141,16 +203,28 @@ internal class Program
           productMatrix.ToString();
           break;
         case 3:
+          WriteLine("Результат сравнения: ");
+          WriteLine(firstMatrix > secondMatrix);
           break;
         case 4:
+          WriteLine("Результат сравнения: ");
+          WriteLine(firstMatrix < secondMatrix);
           break;
         case 5:
+          WriteLine("Результат сравнения: ");
+          WriteLine(firstMatrix >= secondMatrix);
           break;
         case 6:
+          WriteLine("Результат сравнения: ");
+          WriteLine(firstMatrix <= secondMatrix);
           break;
         case 7:
+          WriteLine("Результат сравнения: ");
+          WriteLine(firstMatrix == secondMatrix);
           break;
         case 8:
+          WriteLine("Результат сравнения: ");
+          WriteLine(firstMatrix != secondMatrix);
           break;
         case 9:
           break;
