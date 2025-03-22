@@ -62,10 +62,36 @@ internal class Program
     SquareMatrix firstMatrix = SquareMatrix.MatrixConstructor(sizeMatrix, random);
     SquareMatrix secondMatrix = SquareMatrix.MatrixConstructor(sizeMatrix, random);
 
-    // Вывод матриц на экран
-    WriteLine("Первая матрица:");
-    firstMatrix.ToString();
-    WriteLine("\nВторая матрица:");
-    secondMatrix.ToString();
+    // Демонстрация работы матричного калькулятора
+    while (true)
+    {
+      Clear();
+      WriteLine("-----------------------------");
+      WriteLine("=== МАТРИЧНЫЙ КАЛЬКУЛЯТОР ===");
+      WriteLine("-----------------------------");
+
+      // Вывод матриц и меню на экран
+      WriteLine("Первая матрица:");
+      firstMatrix.ToString();
+      WriteLine("\nВторая матрица:");
+      secondMatrix.ToString();
+      WriteLine("\nМеню:\n1) Сложение матриц" +
+          "\n2) Произведение матриц" +
+          "\n3) Операция >" +
+          "\n4) Операция <" +
+          "\n5) Операция >=" +
+          "\n6) Операция <=" +
+          "\n7) Операция ==" +
+          "\n8) Операция !=" +
+          "\n9) true / false" +
+          "\n10) The determinant of the matrix" +
+          "\n0) Выйти");
+      Write("Выберите действие: ");
+      int сhoice = Convert.ToInt32(ReadLine());
+      if (сhoice == 0) break;
+      WriteLine();
+    }
+    WriteLine("\nНажмите любую клавишу, чтобы продолжить...");
+    ReadKey();
   }
 }
