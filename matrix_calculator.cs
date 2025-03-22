@@ -354,7 +354,14 @@ internal class Program
           "\n14) Получить хэш-коды матриц" +
           "\n0) Выйти");
       Write("Выберите действие: ");
-      int choice = Convert.ToInt32(ReadLine());
+      string input = ReadLine();
+      
+      // Проверка на пустой ввод
+      if (string.IsNullOrEmpty(input)) continue;
+
+      // Попытка преобразовать ввод в число
+      if (!int.TryParse(input, out int choice)) continue;
+
       if (choice == 0) break;
       WriteLine();
 
