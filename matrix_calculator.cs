@@ -41,6 +41,42 @@ class SquareMatrix
       WriteLine();
     }
   }
+
+  // Метод для сложения матриц
+  public static SquareMatrix operator +(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    int size = firstMatrix.size;
+    SquareMatrix result = new SquareMatrix(size);
+    for (int rowIndex = 0; rowIndex < size; ++rowIndex)
+    {
+      for (int columnIndex = 0; columnIndex < size; ++columnIndex)
+      {
+        result.digits[rowIndex, columnIndex] = firstMatrix.digits[rowIndex, columnIndex] + secondMatrix.digits[rowIndex, columnIndex];
+      }
+    }
+    return result;
+  }
+
+  // Метод для умножения матриц
+  public static SquareMatrix operator *(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
+  {
+    int size = firstMatrix.size;
+    SquareMatrix result = new SquareMatrix(size);
+    for (int rowIndex = 0; rowIndex < size; ++rowIndex)
+    {
+      for (int columnIndex = 0; columnIndex < size; ++columnIndex)
+      {
+        result.digits[rowIndex, columnIndex] = 0;
+
+        // Вычисляет сумму произведений
+        for (int step = 0; step < size; ++step)
+        {
+          result.digits[rowIndex, columnIndex] += firstMatrix.digits[rowIndex, step] * secondMatrix.digits[step, columnIndex];
+        }
+      }
+    }
+    return result;
+  }
 }
 
 internal class Program
@@ -75,8 +111,8 @@ internal class Program
       firstMatrix.ToString();
       WriteLine("\nВторая матрица:");
       secondMatrix.ToString();
-      WriteLine("\nМеню:\n1) Сложение матриц" +
-          "\n2) Произведение матриц" +
+      WriteLine("\nМеню:\n1) Операция +" +
+          "\n2) Операция *" +
           "\n3) Операция >" +
           "\n4) Операция <" +
           "\n5) Операция >=" +
@@ -90,8 +126,41 @@ internal class Program
       int сhoice = Convert.ToInt32(ReadLine());
       if (сhoice == 0) break;
       WriteLine();
+      
+      // Выбор действия с матрицами
+      switch (сhoice)
+      {
+        case 1:
+          WriteLine("Результат сложения: ");
+          SquareMatrix sumMatrix = firstMatrix + secondMatrix;
+          sumMatrix.ToString();
+          break;
+        case 2:
+          WriteLine("Результат произведения: ");
+          SquareMatrix productMatrix = firstMatrix * secondMatrix;
+          productMatrix.ToString();
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5:
+          break;
+        case 6:
+          break;
+        case 7:
+          break;
+        case 8:
+          break;
+        case 9:
+          break;
+        case 10:
+          break;
+        default:
+          break;
+      }
+      WriteLine("\nНажмите любую клавишу, чтобы продолжить...");
+      ReadKey();
     }
-    WriteLine("\nНажмите любую клавишу, чтобы продолжить...");
-    ReadKey();
   }
 }
