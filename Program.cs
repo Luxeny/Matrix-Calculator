@@ -13,12 +13,10 @@ public class Program
             return;
         }
 
-        // Инициализация матриц с рандомными значениями
         Random random = new Random();
         SquareMatrix firstMatrix = SquareMatrix.MatrixConstructor(sizeMatrix, random);
         SquareMatrix secondMatrix = SquareMatrix.MatrixConstructor(sizeMatrix, random);
 
-        // Демонстрация работы матричного калькулятора
         while (true)
         {
             Clear();
@@ -49,16 +47,13 @@ public class Program
             Write("Выберите действие: ");
             string input = ReadLine();
 
-            // Проверка на пустой ввод
             if (string.IsNullOrEmpty(input)) continue;
 
-            // Попытка преобразовать ввод в число
             if (!int.TryParse(input, out int choice)) continue;
 
             if (choice == 0) break;
             WriteLine();
 
-            // Выбор действия с матрицами
             try
             {
                 switch (choice)
