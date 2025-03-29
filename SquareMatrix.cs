@@ -6,14 +6,12 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
     public int size;
     public int[,] dataOfMatrix;
 
-    // Конструктор для инициализации размера матрицы
     public SquareMatrix(int size)
     {
         this.size = size;
         dataOfMatrix = new int[size, size];
     }
 
-    // Конструктор для инициализации матрицы из двумерного массива
     public SquareMatrix(int[,] matrix)
     {
         if (matrix.GetLength(0) != matrix.GetLength(1))
@@ -25,7 +23,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         this.dataOfMatrix = (int[,])matrix.Clone(); // Глубокая копия массива
     }
 
-    // Метод для заполнения матрицы случайными числами
     public static SquareMatrix MatrixConstructor(int size, Random random)
     {
         SquareMatrix result = new SquareMatrix(size);
@@ -40,7 +37,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return result;
     }
 
-    // Метод для вывода матрицы на экран
     public void ToString()
     {
         for (int rowIndex = 0; rowIndex < size; ++rowIndex)
@@ -53,7 +49,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         }
     }
 
-    // Метод для нахождения суммы элементов матрицы
     public int SumMatrixElements(SquareMatrix matrix)
     {
         int size = matrix.size;
@@ -68,7 +63,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return resultSum;
     }
 
-    // Метод для нахождения детерминанта
     public int Determinant()
     {
         if (size == 1)
@@ -99,13 +93,11 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return determinant;
     }
 
-    // Неявное приведение к int (детерминанту)
     public static implicit operator int(SquareMatrix matrix)
     {
         return matrix.Determinant();
     }
 
-    // Метод для нахождения обратной матрицы
     public SquareMatrix Inverse()
     {
         int determinant = Determinant();
@@ -119,7 +111,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         {
             for (int columnIndex = 0; columnIndex < size; ++columnIndex)
             {
-                // Создается минор для элемента (row, column)
                 SquareMatrix minorMatrix = new SquareMatrix(size - 1);
                 for (int rowDeterminant = 0, minorRow = 0; rowDeterminant < size; ++rowDeterminant)
                 {
@@ -145,7 +136,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return inverseMatrix;
     }
 
-    // Перегрузка оператора +
     public static SquareMatrix operator +(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         if (firstMatrix.size != secondMatrix.size)
@@ -165,7 +155,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return result;
     }
 
-    // Перегрузка оператора *
     public static SquareMatrix operator *(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         if (firstMatrix.size != secondMatrix.size)
@@ -189,31 +178,26 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return result;
     }
 
-    // Перегрузка оператора >
     public static bool operator >(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         return firstMatrix.Determinant() > secondMatrix.Determinant();
     }
 
-    // Перегрузка оператора <
     public static bool operator <(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         return firstMatrix.Determinant() < secondMatrix.Determinant();
     }
 
-    // Перегрузка оператора >=
     public static bool operator >=(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         return firstMatrix.Determinant() >= secondMatrix.Determinant();
     }
 
-    // Перегрузка оператора <=
     public static bool operator <=(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         return firstMatrix.Determinant() <= secondMatrix.Determinant();
     }
 
-    // Перегрузка оператора ==
     public static bool operator ==(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         if (ReferenceEquals(firstMatrix, secondMatrix))
@@ -227,25 +211,21 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return firstMatrix.Determinant() == secondMatrix.Determinant();
     }
 
-    // Перегрузка оператора !=
     public static bool operator !=(SquareMatrix firstMatrix, SquareMatrix secondMatrix)
     {
         return !(firstMatrix == secondMatrix);
     }
 
-    // Перегрузка оператора true
     public static bool operator true(SquareMatrix matrix)
     {
         return matrix.Determinant() != 0;
     }
 
-    // Перегрузка оператора false
     public static bool operator false(SquareMatrix matrix)
     {
         return matrix.Determinant() == 0;
     }
 
-    // Реализация интерфейса IComparable<SquareMatrix>
     public int CompareTo(SquareMatrix other)
     {
         if (other == null)
@@ -255,7 +235,6 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return this.Determinant().CompareTo(other.Determinant());
     }
 
-    // Переопределение метода Equals
     public override bool Equals(object obj)
     {
         if (obj is SquareMatrix other)
@@ -265,19 +244,16 @@ class SquareMatrix : ICloneable, IComparable<SquareMatrix>
         return false;
     }
 
-    // Переопределение метода GetHashCode
     public override int GetHashCode()
     {
         return Determinant().GetHashCode();
     }
 
-    // Реализация интерфейса ICloneable (глубокое копирование)
     public object Clone()
     {
         return new SquareMatrix((int[,])dataOfMatrix.Clone());
     }
 
-    // Метод для глубокого копирования
     public SquareMatrix DeepClone()
     {
         return (SquareMatrix)Clone();
