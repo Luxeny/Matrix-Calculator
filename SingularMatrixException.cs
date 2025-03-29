@@ -1,6 +1,5 @@
 using System;
 
-// Исключение для вырожденной матрицы
 public class SingularMatrixException : Exception
 {
     public SingularMatrixException() : base("Матрица вырождена, операция невозможна.") { }
