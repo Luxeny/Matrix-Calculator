@@ -23,8 +23,6 @@ public class Program
             WriteLine("-----------------------------");
             WriteLine("=== МАТРИЧНЫЙ КАЛЬКУЛЯТОР ===");
             WriteLine("-----------------------------");
-
-            // Вывод матриц и меню на экран
             WriteLine("Первая матрица:");
             firstMatrix.ToString();
             WriteLine("\nВторая матрица:");
