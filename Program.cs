@@ -144,18 +144,11 @@ public class Program
                 }
             }
 
-            catch (MatrixSizeMismatchException ex)
-            {
-                WriteLine($"Ошибка: {ex.Message}");
-            }
-            catch (SingularMatrixException ex)
-            {
-                WriteLine($"Ошибка: {ex.Message}");
-            }
             catch (Exception ex)
             {
-                WriteLine($"Произошла ошибка: {ex.Message}");
+                WriteLine($"Ошибка: {ex.Message}");
             }
+            
             WriteLine("\nНажмите любую клавишу, чтобы продолжить...");
             ReadKey();
         }
